@@ -1,9 +1,9 @@
 import React          from 'react';
 import { observer }   from 'mobx-react';
 import userstore      from './components/userstore';
-import inputform      from './inputform';
-import submitbutton   from './submitbutton';
-import loginform      from './loginform';
+/*import inputform      from './inputform';
+import submitbutton   from './submitbutton';*/
+import Loginform      from './Loginform';
 import './App.css';
 
 class App extends React.Component{
@@ -13,7 +13,7 @@ class App extends React.Component{
     try{
       let res = await fetch('/isLoggedIn',{
         method : 'post',
-        header :{
+        headers :{
           'Accept' : 'application/json',
           'content-type' : 'application/json',
         }
@@ -24,20 +24,20 @@ class App extends React.Component{
       //checking whether user is registered
       if(result && result.success)
       {
-        userstore.loading = 'false';
-        userstore.isLoggedIn = 'true';
+        userstore.loading = false;
+        userstore.isLoggedIn = true;
         userstore.username = result.username;
       }
 
       else{
-        userstore.loading = 'false';
-        userstore.isLoggedIn = 'false';
+        userstore.loading = false;
+        userstore.isLoggedIn = false;
       }
     }
     catch(error)
     {
-      userstore.loading = 'false';
-      userstore.isLoggedIn = 'false';
+      userstore.loading = false;
+      userstore.isLoggedIn = false;
     }
   }
 
@@ -47,7 +47,7 @@ class App extends React.Component{
         method : 'post',
         header :{
           'Accept' : 'application/json',
-          'content-type' : 'application/json',
+          'content-Type' : 'application/json',
         }
       });
 
@@ -56,7 +56,7 @@ class App extends React.Component{
       //checking whether user is registered
       if(result && result.success)
       {
-        userstore.isLoggedIn = 'false';
+        userstore.isLoggedIn = false;
         userstore.username = '';
       }
 
@@ -80,8 +80,7 @@ class App extends React.Component{
       );
     }
    
-    else(userstore.isLoggedIn)
-    {
+    else if(userstore.isLoggedIn){  
       return (
         <div className="App">
           <div className='container'>
@@ -95,14 +94,17 @@ class App extends React.Component{
           </div>
         </div>
       );
+      
     }
 
-    <div className="App">
-          <div className='container'>
-           <loginform/>
-          </div>
+    return (
+      <div className="App">
+        <div className='container'>
+          <Loginform/>
         </div>
-  }
+      </div>
+    );
+    
 }
-
+}
 export default observer(App);

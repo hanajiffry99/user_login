@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import './components/userstore';
 
-class inputform extends React.Component {
+class Inputform extends React.Component {
   render(){
     return (
       <div className="inputform">
@@ -17,4 +17,4 @@ class inputform extends React.Component {
   }
 }
 
-export default inputform;
+export default Inputform;

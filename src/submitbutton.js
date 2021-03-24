@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import './components/userstore';
 
-class submitbutton extends React.Component {
+class Submitbutton extends React.Component {
   render(){
     return (
       <div className="submitbutton">
@@ -19,4 +19,4 @@ class submitbutton extends React.Component {
   }
 }
 
-export default submitbutton;
+export default Submitbutton;
