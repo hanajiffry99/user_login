@@ -6,7 +6,12 @@ class inputform extends React.Component {
   render(){
     return (
       <div className="inputform">
-       <b>Hello worldn</b> 
+          <input
+          className='input'
+          type = {this.props.type}
+          placeholder ={this.props.placeholder}
+          value ={this.props.value}
+          onChange= { (error) => this.props.onChange(error.target.value)}/>  
       </div>
     );
   }
