@@ -1,4 +1,5 @@
 import React          from 'react';
+import { observer }   from 'mobx-react';
 import userstore      from './components/userstore';
 import inputform      from './inputform';
 import submitbutton   from './submitbutton';
@@ -66,15 +67,42 @@ class App extends React.Component{
     }
   }
 
-
-
   render(){
-    return (
-      <div className="App">
-        <b>Hii</b>
-      </div>
-    );
+
+    if(userstore.loading)
+    {
+      return (
+        <div className="App">
+          <div className='container'>
+            Loading,Please wait for a moment.....
+          </div>
+        </div>
+      );
+    }
+   
+    else(userstore.isLoggedIn)
+    {
+      return (
+        <div className="App">
+          <div className='container'>
+            Welcome {userstore.username}
+
+            <submitbutton
+            text = {'Log out'}
+            disabled = {false}
+            onClick = {() => this.doLogout()}
+            />
+          </div>
+        </div>
+      );
+    }
+
+    <div className="App">
+          <div className='container'>
+           <loginform/>
+          </div>
+        </div>
   }
 }
 
-export default App;
+export default observer(App);
